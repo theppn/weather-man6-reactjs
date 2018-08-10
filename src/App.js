@@ -1,14 +1,9 @@
 import React, {Component} from 'react';
+import {Environment} from "./Environment";
 import logo from './logo.svg';
 import './App.css';
 import {debounce} from 'throttle-debounce';
-
-const appId = '1d96f326376f8503f41b36e079a90220';
-const apiUrl = 'https://api.openweathermap.org/data/2.5/forecast';
-const iconUrl = 'http://openweathermap.org/img/w/';
-const iconFormat = 'png';
-const units = 'metric';
-const lang = 'fr';
+import Tab from './Tab';
 
 class App extends Component {
     constructor(props) {
@@ -107,10 +102,10 @@ class App extends Component {
         }
     }
     onSubmit = debounce(1000, () => {
-        fetch(apiUrl + '?q=' + this.state.city + ',' + this.state.countryCode
-            + '&units=' + units
-            + '&lang=' + lang
-            + '&APPID=' + appId
+        fetch(Environment.apiUrl + '?q=' + this.state.city + ',' + this.state.countryCode
+            + '&units=' + Environment.units
+            + '&lang=' + Environment.lang
+            + '&APPID=' + Environment.appId
         )
             .then((response) => {
                 if (response.ok) {
@@ -160,65 +155,6 @@ class App extends Component {
                 ):('')}
             </div>
         );
-    }
-}
-
-class Tab extends React.Component {
-    onClick = (event) => {
-        const target = event.target.closest('.tab-container').getElementsByClassName('tab-info-container')[0];
-        if (target.style.display !== 'flex') {
-            target.style.display = 'flex';
-        } else {
-            target.style.display = 'none';
-        }
-    }
-    render() {
-        return this.props.data.map((item, index) => {
-            const d = new Date(item.date);
-            const day = ((d.getDate() + '').length > 1 ? '' : '0') + d.getDate();
-            const month = (((d.getMonth() + 1) + '').length > 1 ? '' : '0') + (d.getMonth()+1);
-            const year = d.getFullYear() + '';
-            return (
-                <div key={'tab'+index} className="tab-container">
-                    <button className="tab-title-container" onClick={this.onClick}>
-                        {day + '/' + month + '/' + year}
-                    </button>
-                    <div className="tab-info-container" style={{display:'none'}}>
-                        <Element data={item.data} />
-                    </div>
-                </div>
-            );
-        });
-    }
-}
-
-class Element extends React.Component {
-    render() {
-        return this.props.data.map((item) => {
-            const d = new Date(item.date);
-            const h = ((d.getHours() + '').length > 1 ? '' : '0') + d.getHours();
-            const m = ((d.getMinutes() + '').length > 1 ? '' : '0') + d.getMinutes();
-            return (
-                <div key={item.date} className="element-container">
-                    <div className="element-time-container">
-                        <h2>{h + ':' + m}</h2>
-                    </div>
-                    <div className="element-icon-container">
-                        <img alt={item.description} src={iconUrl + '/' + item.icon + '.' + iconFormat}/>
-                        <h3>{item.temp}°C</h3>
-                    </div>
-                    <div className="element-detail-container">
-                        <h3>Détails :</h3>
-                        <ul>
-                            <li>Description : {item.description}</li>
-                            <li>Pression : {item.pressure}hPa</li>
-                            <li>Humidité : {item.humidity}%</li>
-                            <li>Vent : {item.windSpeed}m/s</li>
-                        </ul>
-                    </div>
-                </div>
-            );
-        });
     }
 }
 

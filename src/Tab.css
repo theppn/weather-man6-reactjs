@@ -1,0 +1,33 @@
+div.tab-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+}
+
+button.tab-title-container {
+    position: sticky;
+    top: 0px;
+    width: 100%;
+    text-align: center;
+    font-size: 24px;
+    background-color: #FFFFFF;
+    color: #909090;
+    border-color: #D0D0D0;
+    border-width: 1px;
+    border-style: dotted;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+div.tab-info-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-grow: 1;
+    width: 100%;
+    padding-top: 10px
+}

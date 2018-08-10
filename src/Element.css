@@ -1,0 +1,36 @@
+.element {
+    margin-bottom: 10px;
+    margin-left: 10px;
+}
+
+div.element-container {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: center;
+    border-color: #D0D0D0;
+    border-style: solid;
+    border-width: 1px;
+    border-collapse: collapse;
+    width: 300px;
+    background: linear-gradient(#ADD8E6, #FFFFFF);
+    border-radius: 5px;
+}
+
+div.element-time-container {
+    color: #909090;
+}
+
+div.element-icon-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items: center;
+    font-size: 32px;
+}
+
+div.element-icon-container > img {
+    width: 50px;
+}
